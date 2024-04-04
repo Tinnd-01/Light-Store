@@ -1,0 +1,21 @@
+@import '../../../../styles/styles-variable.scss';
+
+.drag-area, .drop-area {
+  border: 1px dashed $monochrome-grey1;
+  height: 7em;
+}
+
+.drop-area {
+  background-color: $primary-navy-blue-lightness;
+}
+
+.img {
+  width: auto;
+  height: 6.5em;
+}
+
+:host(.ng-dirty.ng-invalid)::ng-deep {
+  .area {
+    border-color: $secondary-imperial-red;
+  }
+}

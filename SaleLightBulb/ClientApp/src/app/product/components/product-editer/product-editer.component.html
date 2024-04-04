@@ -1,0 +1,48 @@
+<div class="container py-2">
+  <h1 class="py-2 text-primary">{{ title$ | async }}</h1>
+  <form [formGroup]="form">
+    <div class="row">
+      <app-form-field class="col" label="Tên sản phẩm">
+        <input type="text" pInputText formControlName="name" />
+      </app-form-field>
+      <app-form-field class="col" label="Mã sản phẩm">
+        <input type="text" pInputText formControlName="code" />
+      </app-form-field>
+    </div>
+    <div class="row">
+      <app-form-field class="col" label="Loại sản phẩm">
+        <p-dropdown [options]="(categories$ | async) ?? []" formControlName="categoryId" optionLabel="name"
+          optionValue="id" [autoDisplayFirst]="false"></p-dropdown>
+      </app-form-field>
+      <app-form-field class="col" label="Giá">
+        <input type="number" min="0" max="4000000000" pInputText formControlName="price" />
+      </app-form-field>
+      <app-form-field class="col" label="Số lượng sản phẩm">
+        <input type="number" min="0" max="999999999" pInputText formControlName="amount" />
+      </app-form-field>
+    </div>
+    <div class="row">
+      <app-form-field class="col" label="Màu sắc">
+        <input type="text" pInputText formControlName="powerCapacity" />
+      </app-form-field>
+      <app-form-field class="col" label="Điện áp / Công suất">
+        <input type="text" pInputText formControlName="voltage" />
+      </app-form-field>
+      <app-form-field class="col" label="Kích thước">
+        <input type="text" pInputText formControlName="size" />
+      </app-form-field>
+    </div>
+
+    <app-form-field label="Hình ảnh">
+      <app-upload-area formControlName="image" accept="image/*"></app-upload-area>
+    </app-form-field>
+
+    <app-form-field label="Mô tả sản phẩm">
+      <textarea pInputTextarea rows="5" formControlName="detail"></textarea>
+    </app-form-field>
+
+    <div class="d-flex justify-content-end">
+      <p-button label="Lưu" (onClick)="save()" icon="pi pi-check" [disabled]="form.invalid"></p-button>
+    </div>
+  </form>
+</div>

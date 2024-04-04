@@ -1,0 +1,106 @@
+<div class="container pb-4">
+  <h1 class="px-3 py-3 text-primary">{{ (category$ | async)?.name }}</h1>
+
+  <div class="card">
+    <p-dataView
+      #dv
+      [value]="(products$ | async) ?? []"
+      [layout]="layout"
+      [paginator]="true"
+      [rows]="12"
+    >
+      <ng-template pTemplate="header">
+        <div class="d-flex justify-content-end">
+          <p-dataViewLayoutOptions layout="layout"></p-dataViewLayoutOptions>
+        </div>
+      </ng-template>
+      <ng-template let-product pTemplate="listItem">
+        <div class="col-12 p-2">
+          <div class="row">
+            <div class="col-4">
+              <img
+                class="img-fluid rounded-start h-100"
+                [src]="
+                  product.image
+                    ? product.image
+                    : '../../../../assets/logo_light_bulb.png'
+                "
+                [alt]="product.name"
+              />
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <a (click)="onItemClick(product)" class="none-underline">
+                  <h4 class="card-title" [pTooltip]="product.name">
+                    {{ product.name }}
+                  </h4>
+                </a>
+
+                <p class="card-text p-0 m-0">Mã sản phẩm: {{ product.code }}</p>
+                <p class="card-text p-0 m-0">
+                  Công suất: {{ product.powerCapacity }}
+                </p>
+                <p class="card-text p-0 m-0">Điện áp: {{ product.voltage }}</p>
+                <p class="card-text text-secondary py-2 product-detail-content">
+                  {{ product.detail }}
+                </p>
+                <p class="text-danger">
+                  <b>{{ (product.price | money) + " VNĐ" }}</b>
+                </p>
+
+                <a *ngIf="product.amount == 0" class="btn btn-secondary m-0">
+                  Hết hàng
+                </a>
+                <a
+                  *ngIf="product.amount"
+                  class="btn btn-success m-0"
+                  (click)="orderNow(product)"
+                  >Đặt hàng ngay</a
+                >
+                <a class="btn btn-primary ms-2" (click)="addToCart(product)"
+                  >Thêm vào giỏ</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-product pTemplate="gridItem">
+        <div class="col-3 p-2">
+          <div class="card">
+            <img
+              class="card-img-top"
+              [src]="
+                product.image
+                  ? product.image
+                  : '../../../../assets/logo_light_bulb.png'
+              "
+              [alt]="product.name"
+            />
+            <div class="card-body">
+              <a (click)="onItemClick(product)" class="none-underline">
+                <h5 class="card-title" [pTooltip]="product.name">
+                  {{ product.name }}
+                </h5>
+              </a>
+              <p class="card-text p-0 m-0">Mã sản phẩm: {{ product.code }}</p>
+              <p class="card-text p-0 m-0">
+                Công suất: {{ product.powerCapacity }}
+              </p>
+              <p class="card-text p-0 m-0">Điện áp: {{ product.voltage }}</p>
+              <p class="text-danger pt-2">
+                <b>{{ (product.price | money) + " VNĐ" }}</b>
+              </p>
+              <a class="btn btn-success m-0" (click)="orderNow(product)"
+                >Đặt hàng ngay</a
+              >
+              <a class="btn btn-primary ms-2" (click)="addToCart(product)"
+                >Thêm vào giỏ</a
+              >
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</div>

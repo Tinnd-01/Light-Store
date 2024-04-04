@@ -1,0 +1,134 @@
+<div class="container">
+  <form [formGroup]="form" class="py-2">
+    <p-card class="col-sm-5 p-2">
+      <ng-template pTemplate="header">
+        <h2 class="pt-4 ps-4 text-primary">Cập nhật thông tin tài khoản</h2>
+      </ng-template>
+
+      <div class="row">
+        <app-form-field class="col-sm-6" label="Họ và tên đệm">
+          <input type="text" pInputText formControlName="lastName" />
+        </app-form-field>
+        <app-form-field class="col-sm-6" label="Tên">
+          <input type="text" pInputText formControlName="firstName" />
+        </app-form-field>
+        <app-form-field class="col-sm-6" label="Email">
+          <input
+            type="text"
+            pInputText
+            formControlName="email"
+            readonly="true"
+          />
+        </app-form-field>
+        <app-form-field class="col-sm-6" label="Số điện thoại">
+          <input
+            type="text"
+            pInputText
+            formControlName="phoneNumber"
+            maxlength="10"
+          />
+        </app-form-field>
+      </div>
+
+      <app-form-field label="Địa chỉ">
+        <div formArrayName="addresses">
+          <p-table [value]="controls.addresses.controls">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 25%">Tỉnh / Thành phố</th>
+                <th style="width: 25%">Quận / Huyện / Thị xã</th>
+                <th style="width: 40%">Địa chỉ chi tiết</th>
+                <th style="width: 10%"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+              <tr [formGroupName]="rowIndex">
+                <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <app-form-field class="m-0">
+                        <input type="text" pInputText formControlName="city" />
+                      </app-form-field>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{ rowData.controls.city.value }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <app-form-field>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="district"
+                        />
+                      </app-form-field>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{ rowData.controls.district.value }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <app-form-field>
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="addressDetail"
+                        />
+                      </app-form-field>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{ rowData.controls.addressDetail.value }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <button
+                  *ngIf="rowData.controls.canDelete.value"
+                    class="p-button p-button-text p-button-danger"
+                    (click)="removeAddress(rowIndex)"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </app-form-field>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-plus"
+        class="add p-button-text ps-0 ps-sm-1 mt-2"
+        label="Thêm địa chỉ"
+        type="button"
+        (click)="addAddress()"
+      ></button>
+      <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-end">
+          <p-button
+            label="Lưu"
+            (onClick)="save()"
+            icon="pi pi-check"
+            [disabled]="form.invalid || !form.dirty"
+          ></p-button>
+          <p-button
+            label="Hủy"
+            icon="pi pi-sign-in"
+            styleClass="p-button-danger"
+            [style]="{ 'margin-left': '.5em' }"
+            (onClick)="cancel()"
+            [disabled]="!form.dirty"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </form>
+</div>
+

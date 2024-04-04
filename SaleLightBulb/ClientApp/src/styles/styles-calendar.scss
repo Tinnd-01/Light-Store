@@ -1,0 +1,40 @@
+.p-calendar.p-calendar-w-btn {
+  .p-datepicker-trigger {
+    box-shadow: none;
+  }
+}
+
+.p-datepicker {
+  table {
+    td {
+      > span {
+        &.p-highlight {
+          color: white;
+          background: $primary-navy-blue;
+        }
+      }
+
+      &.p-datepicker-today {
+        > span {
+          background: $monochrome-grey2;
+          &.p-highlight {
+            color: white;
+            background: $primary-navy-blue;
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.p-disabled) {
+    table {
+      td {
+        span {
+          &:not(.p-highlight):not(.p-disabled):hover {
+            background: $monochrome-grey4;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<div class="container py-2">
+  <p-orderList
+    [value]="(wishList$ | async) ?? []"
+    header="Danh sách yêu thích"
+    [dragdrop]="true"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="col-12 p-2 card">
+        <div class="d-flex">
+          <div style="width: 10rem">
+            <img
+              style="height: 10rem"
+              [src]="
+                product.image
+                  ? product.image
+                  : '../../../../assets/logo_light_bulb.png'
+              "
+              [alt]="product.name"
+            />
+          </div>
+          <div>
+            <div class="card-body">
+              <a (click)="onItemClick(product)" class="none-underline">
+                <h4 class="card-title" [pTooltip]="product.name">
+                  {{ product.name }}
+                </h4>
+              </a>
+
+              <p class="card-text p-0 m-0">Mã sản phẩm: {{ product.code }}</p>
+
+              <p class="text-danger">
+                <b>{{ (product.price | money) + " VNĐ" }}</b>
+              </p>
+              <a
+                *ngIf="product.amount"
+                class="btn btn-success"
+                (click)="orderNow(product)"
+                >Đặt hàng ngay</a
+              >
+
+              <a *ngIf="product.amount == 0" class="btn btn-secondary">
+                Hết hàng
+              </a>
+              <a class="btn btn-primary ms-1" (click)="addToCart(product)"
+                >Thêm vào giỏ</a
+              >
+              <a
+                class="btn btn-outline-danger ms-1"
+                (click)="removeToWishList(product)"
+              >
+                Bỏ yêu thích
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+</div>

@@ -1,0 +1,52 @@
+@import "../../../../styles/styles-variable.scss";
+
+:host::ng-deep {
+  display: block;
+
+  label.invalid {
+    color: $secondary-imperial-red;
+  }
+
+  label.required::after {
+    content: "\00a0 *";
+    color: $secondary-imperial-red;
+  }
+
+  i.p-invalid {
+    color: $secondary-imperial-red !important;
+    z-index: 999;
+  }
+
+  div.p-input-icon-right {
+    &.invalid > *:not(.p-invalid) {
+      padding-left: 1rem;
+      display: block;
+
+      &:not(input) {
+        padding-left: 0.4rem;
+      }
+    }
+
+    div.p-invalid {
+      position: absolute;
+      top: 0;
+      background-color: $secondary-imperial-red;
+      width: 0.5rem;
+      height: 100%;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+  }
+
+  .p-invalid {
+    color: $secondary-imperial-red !important;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}

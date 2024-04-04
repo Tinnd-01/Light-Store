@@ -1,0 +1,81 @@
+<div class="container py-2">
+  <p-orderList
+    [value]="(carts$ | async) ?? []"
+    header="Giỏ hàng"
+    [dragdrop]="true"
+  >
+    <ng-template let-cart pTemplate="item">
+      <div class="col-12 p-2 card">
+        <div class="d-flex">
+          <div style="width: 16rem">
+            <img
+              style="height: 16rem"
+              [src]="
+                cart.product.image
+                  ? cart.product.image
+                  : '../../../../assets/logo_light_bulb.png'
+              "
+              [alt]="cart.product.name"
+            />
+          </div>
+          <div>
+            <div class="card-body">
+              <a (click)="onItemClick(cart)" class="none-underline">
+                <h4 class="card-title" [pTooltip]="cart.product.name">
+                  {{ cart.product.name }}
+                </h4>
+              </a>
+
+              <p class="card-text p-0 m-0 text-secondary">
+                Mã sản phẩm: {{ cart.product.code }}
+              </p>
+
+              <p class="card-text p-0 m-0">
+                Đơn giá (x1): {{ cart.product.price | money }} VNĐ
+              </p>
+
+              <p class="card-text p-0 my-1">
+                Số lượng:
+                <a
+                  class="btn btn-outline-primary py-0 mx-1 text-center"
+                  (click)="decreaseAmount(cart)"
+                >
+                  -
+                </a>
+                {{ cart.amount }}
+                <a
+                  class="btn btn-outline-primary py-0 ms-1 text-center"
+                  (click)="increaseAmount(cart)"
+                >
+                  +
+                </a>
+              </p>
+
+              <p class="text-danger">
+                <b
+                  >Tổng:
+                  {{ (cart.product.price * cart.amount | money) + " VNĐ" }}
+                </b>
+              </p>
+              <a
+                *ngIf="cart.product.amount"
+                class="btn btn-primary"
+                (click)="orderNow(cart)"
+              >
+                Đặt hàng
+              </a>
+
+              <a *ngIf="cart.product.amount == 0" class="btn btn-secondary">
+                Hết hàng
+              </a>
+
+              <a class="btn btn-outline-danger ms-1" (click)="remove(cart)">
+                Xóa
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+</div>
