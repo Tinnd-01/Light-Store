@@ -1,0 +1,149 @@
+<app-spinner></app-spinner>
+<p-toast position="top-center">
+  <ng-template let-message pTemplate="message">
+    <p [innerHTML]="message.detail"></p>
+  </ng-template>
+</p-toast>
+<p-menubar [model]="nav" styleClass="top-menu">
+  <ng-template pTemplate="start">
+    <a [routerLink]="'/'">
+      <img
+        class="logo-img"
+        src="../../../../assets/logo_light_bulb.png"
+        alt="logo"
+      />
+    </a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="end-container">
+      <div class="d-flex align-content-center align-items-center">
+        <form [formGroup]="form" (submit)="search()">
+          <input
+            class="border-noround-right"
+            type="text"
+            pInputText
+            placeholder="Tìm kiếm sản phẩm"
+            formControlName="search"
+          />
+          <button
+            icon="pi pi-search"
+            type="submit"
+            pButton
+            class="search-button"
+          ></button>
+        </form>
+
+        <p-button
+          *ngIf="authenResolver.isLogin$ | async"
+          icon="pi pi-shopping-cart"
+          styleClass="p-button-rounded p-button-danger p-button-text"
+          pTooltip="Giỏ hàng"
+          (click)="goToCart()"
+          [label]="
+            (authenResolver.cartLength$ | async)
+              ? '+' + (authenResolver.cartLength$ | async)
+              : ''
+          "
+        >
+        </p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-menubar>
+<div>
+  <div class="full-height">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="bg-dark text-center text-white mt-2">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-4 d-flex justify-content-start">
+      <div>
+        <!-- Facebook -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="https://www.facebook.com"
+          role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+
+        <!-- Twitter -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="https://twitter.com/"
+          role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+
+        <!-- Google -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="https://mail.google.com/chat/"
+          role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+
+        <!-- Instagram -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="https://www.instagram.com/"
+          role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+
+        <!-- Linkedin -->
+        <a
+          class="btn btn-outline-light btn-floating m-1"
+          href="https://www.linkedin.com/"
+          role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+      </div>
+
+      <!-- <form>
+      <div class="d-flex">
+        <div class="me-2">
+          <input
+            type="email"
+            id="form5Example21"
+            class="form-control"
+            placeholder="Địa chỉ Email"
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-light mb-4">
+          Đăng ký
+        </button>
+      </div>
+    </form> -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Text -->
+    <section class="mb-4 company-info">
+      <p>
+        <b>Thế giới ánh sáng Trân Châu Lighting,</b> chuyên cung cấp các sản
+        phẩm đèn – điện chiếu sáng Ánh sáng vươn xa, giá trị mãi đẹp
+      </p>
+      <p class="company-info">
+        <b>Cơ sở kinh doanh:</b> Công ty TNHH thiết bị đèn – điện và chiếu sáng
+        Trân Châu Lighting.
+      </p>
+      <p class="company-info">
+        <b>Địa chỉ:</b> 78 Điện Biên Phủ, Thanh Khê, Đà Nẵng
+      </p>
+      <p class="company-info"><b>Số điện thoại:</b> 0236 3649 779</p>
+    </section>
+    <!-- Section: Text -->
+  </div>
+  <!-- Grid container -->
+</footer>
+<!-- Footer -->
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  rejectButtonStyleClass="p-button-danger"
+  acceptLabel="Đồng ý"
+  rejectLabel="Từ chối"
+></p-confirmDialog>

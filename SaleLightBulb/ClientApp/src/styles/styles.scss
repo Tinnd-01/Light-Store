@@ -1,0 +1,9 @@
+@import "./styles-variable";
+@import "./styles-calendar.scss";
+
+.p-calendar,
+.p-inputnumber,
+.p-dropdown,
+.p-password {
+  width: 100%;
+}

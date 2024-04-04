@@ -1,0 +1,56 @@
+<div class="container p-2">
+  <div class="d-flex justify-content-end" *ngIf="authResolver.isAdmin">
+    <button pButton class="p-button me-2" (click)="editProduct()">
+      Chỉnh sửa
+    </button>
+    <button pButton class="p-button p-button-danger" (click)="removeProduct()">
+      Xóa
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <img [src]="
+          (product$ | async)?.image
+            ? (product$ | async)?.image
+            : '../../../../assets/logo_light_bulb.png'
+        " style="width: 100%; height: auto; display: block" [alt]="(product$ | async)?.name" />
+    </div>
+    <div class="col-sm-8">
+      <h3 class="mb-0 mt-2">{{ (product$ | async)?.name }}</h3>
+      <p class="text-secondary mt-0">
+        Mã sản phẩm: {{ (product$ | async)?.code }}
+      </p>
+      <p>Màu sắc: {{ (product$ | async)?.color }}</p>
+      <p>
+        Điện áp / Công suất: {{ (product$ | async)?.voltageOrPowerCapacity }}
+      </p>
+      <p>Kích thước: {{ (product$ | async)?.size }}</p>
+      <p>Số lượng sản phẩm: {{ (product$ | async)?.amount }}</p>
+      <h5 class="text-danger">
+        <b>{{ (product$ | async)?.price | money }} VNĐ</b>
+      </h5>
+      <div class="m-4"></div>
+      <a *ngIf="(product$ | async)?.amount" class="btn btn-success" (click)="orderNow()">Đặt hàng ngay</a>
+      <a *ngIf="(product$ | async)?.amount == 0" class="btn btn-secondary">
+        Hết hàng
+      </a>
+      <a class="btn btn-primary ms-1" (click)="addToCart()">Thêm vào giỏ</a>
+      <div class="mt-2">
+        <button pButton [ngClass]="(isWishList$ | async) ? 'p-button-outlined' : ''"
+          class="p-button p-button-danger py-2" (click)="addToWishList()">
+          {{
+          (isWishList$ | async)
+          ? "Bỏ yêu thích"
+          : "Thêm vào danh sách yêu thích"
+          }}
+        </button>
+      </div>
+    </div>
+    <div style="text-align: justify">
+      <p class="mt-4">
+        <b>Mô tả sản phẩm</b>
+      </p>
+      <p [innerHTML]="(product$ | async)?.detail"></p>
+    </div>
+  </div>
+</div>

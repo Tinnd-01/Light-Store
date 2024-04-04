@@ -1,0 +1,51 @@
+<div class="container py-2">
+  <p-table
+    [value]="(users$ | async) ?? []"
+    [(selection)]="selectedUsers"
+    dataKey="id"
+    styleClass="p-datatable-striped"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 25, 50]"
+  >
+    <ng-template pTemplate="caption">
+      <h1 class="text-primary">Tài khoản người dùng</h1>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Họ và tên đệm</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-text p-mr-2"
+              (click)="onEdit(user)"
+            ></button>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger p-button-text"
+              (click)="onDelete(user)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,96 @@
+<div class="container py-2">
+  <p-orderList
+    [value]="(orderList$ | async) ?? []"
+    header="Đơn đặt hàng"
+    [dragdrop]="true"
+  >
+    <ng-template let-order pTemplate="item">
+      <div class="col-12 p-2 card">
+        <div class="d-flex">
+          <div style="width: 16rem">
+            <img
+              style="height: 16rem"
+              [src]="
+                order.product.image
+                  ? order.product.image
+                  : '../../../../assets/logo_light_bulb.png'
+              "
+              [alt]="order.product.name"
+            />
+          </div>
+          <div>
+            <div class="card-body">
+              <a (click)="onItemClick(order)" class="none-underline">
+                <h4 class="card-title" [pTooltip]="order.product.name">
+                  {{ order.product.name }}
+                </h4>
+              </a>
+
+              <p class="card-text p-0 m-0 text-secondary">
+                Mã sản phẩm: {{ order.product.code }}
+              </p>
+
+              <p
+                *ngIf="order.orderByUser.id !== currentUserId"
+                class="card-text p-0 m-0 text-success"
+              >
+                <b>
+                  Người nhận: {{ order.orderByUser.lastName }}
+                  {{ order.orderByUser.firstName }} -
+                  {{ order.orderByUser.phoneNumber }}
+                </b>
+              </p>
+
+              <p class="card-text p-0 text-success">
+                Địa chỉ: {{ order.address.addressDetail }},
+                {{ order.address.district }}, {{ order.address.city }}
+              </p>
+
+              <p class="card-text p-0 m-0">
+                Đơn giá (x1): {{ order.product.price | money }} VNĐ
+              </p>
+
+              <p class="card-text p-0 my-1">
+                Số lượng:
+                <a
+                  *ngIf="order.orderByUser.id === currentUserId"
+                  class="btn btn-outline-primary py-0 mx-1 text-center"
+                  (click)="decreaseAmount(order)"
+                >
+                  -
+                </a>
+                {{ order.amount }}
+                <a
+                  *ngIf="order.orderByUser.id === currentUserId"
+                  class="btn btn-outline-primary py-0 ms-1 text-center"
+                  (click)="increaseAmount(order)"
+                >
+                  +
+                </a>
+              </p>
+
+              <p class="text-danger">
+                <b
+                  >Tổng:
+                  {{ (order.product.price * order.amount | money) + " VNĐ" }}
+                </b>
+              </p>
+              <a class="btn btn-primary" (click)="edit(order)">Chỉnh sửa</a>
+              <a
+                *ngIf="
+                  authResolver.isAdmin && order.orderByUserId !== currentUserId
+                "
+                class="btn btn-success ms-1"
+                (click)="contact(order)"
+                >Liên hệ khách hàng</a
+              >
+              <a class="btn btn-outline-danger ms-1" (click)="remove(order)">
+                Xóa
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+</div>

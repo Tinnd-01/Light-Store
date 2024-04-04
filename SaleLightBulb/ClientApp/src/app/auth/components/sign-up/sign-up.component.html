@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="py-5">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <p-card class="col-sm-5 p-2">
+      <ng-template pTemplate="header">
+        <h2 class="pt-4 ps-4 text-primary">Đăng ký tài khoản</h2>
+      </ng-template>
+      <app-form-field label="Họ và tên đệm">
+        <input type="text" pInputText formControlName="lastName" />
+      </app-form-field>
+      <app-form-field label="Tên">
+        <input type="text" pInputText formControlName="firstName" />
+      </app-form-field>
+      <app-form-field label="Số điện thoại">
+        <input type="text" pInputText formControlName="phoneNumber" maxlength="10" />
+      </app-form-field>
+      <app-form-field label="Email">
+        <input type="text" pInputText formControlName="email" />
+      </app-form-field>
+      <app-form-field label="Mật khẩu">
+        <p-password formControlName="password" [toggleMask]="true" [feedback]="true"></p-password>
+      </app-form-field>
+      <div class="row" formGroupName="address">
+        <app-form-field class="col-6" label="Tỉnh / Thành phố">
+          <input type="text" pInputText formControlName="city" />
+        </app-form-field>
+        <app-form-field class="col-6" label="Quận / Huyện / Thị xã">
+          <input type="text" pInputText formControlName="district" />
+        </app-form-field>
+        <app-form-field class="col-12" label="Địa chỉ chi tiết">
+          <input type="text" pInputText formControlName="addressDetail" />
+        </app-form-field>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-end">
+          <p-button label="Đăng ký" (onClick)="signUp()" icon="pi pi-check"></p-button>
+          <p-button label="Đăng nhập" icon="pi pi-sign-in" styleClass="p-button-success"
+            [style]="{ 'margin-left': '.5em' }" (onClick)="goToSignInPage()"></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+    <div class="col-sm-3"></div>
+  </div>
+</form>

@@ -1,0 +1,121 @@
+$primary-navy-blue: #2e548a; // 0
+$primary-navy-blue-light: #b5dafe; // 70
+$primary-navy-blue-lightness: #e0effe; // 90
+$primary-navy-blue-dark: #24436e; // -20
+$primary-navy-blue-darkest: #1b3252; // -40
+
+$primary-celadon-blue: #017698;
+$primary-celadon-blue-light: #94e6fe;
+$primary-celadon-blue-lightness: #dbf6fe;
+$primary-celadon-blue-dark: #005e79;
+$primary-celadon-blue-darkest: #00465b;
+
+$secondary-imperial-red: #e63946;
+$secondary-imperial-red-light: #f7c3c7;
+$secondary-imperial-red-lightness: #fcebec;
+$secondary-imperial-red-dark: #cb1927;
+$secondary-imperial-red-darkest: #98131d;
+
+$secondary-cyan-blue: #99d4d6;
+$secondary-cyan-blue-light: #e0f2f2;
+$secondary-cyan-blue-lightness: #f4fafa;
+$secondary-cyan-blue-dark: #64bdc0;
+$secondary-cyan-blue-darkest: #3f999d;
+
+$secondary-honeydrew: #f1faee;
+$secondary-honeydrew-light: #fafdf9;
+$secondary-honeydrew-lightness: #fdfefd;
+$secondary-honeydrew-dark: #b2e3a2;
+$secondary-honeydrew-darkest: #74cd57;
+
+$secondary-plum: #804180;
+$secondary-plum-light: #debfde;
+$secondary-plum-lightness: #f4e9f4;
+$secondary-plum-dark: #663466;
+$secondary-plum-darkest: #4c264c;
+
+$secondary-orange-yellow: #ffcc00;
+$secondary-orange-yellow-light: #ffefb2;
+$secondary-orange-yellow-lightness: #fff9e5;
+$secondary-orange-yellow-dark: #cca300;
+$secondary-orange-yellow-darkest: #997a00;
+
+$secondary-orange: #e76d3b;
+
+$secondary-green: #79b233;
+
+$secondary-teal: #2dbda8;
+
+$secondary-pink: #d96eae;
+
+$monochrome-black1: #333333;
+$monochrome-black2: #666666;
+$monochrome-grey1: #999999;
+$monochrome-grey2: #bfbfbf;
+$monochrome-grey3: #d7d7d7;
+$monochrome-grey4: #e8e8e8;
+$monochrome-grey5: #fefefe;
+$monochrome-grey6: #f2f2f2;
+$monochrome-grey7: #f8f8f8;
+
+$dark-grayish-lime-green: #353935;
+
+$bright-grey: #e8e8ee;
+
+$pt-period-status-open: $primary-celadon-blue;
+$pt-period-status-processing: $secondary-green;
+$pt-period-status-stopped: $secondary-imperial-red;
+$pt-period-status-closed: $monochrome-black2;
+
+$pt-form-status-deactivate: $monochrome-grey4;
+$pt-form-status-tocomplete: $monochrome-black2;
+$pt-form-status-submitted: $monochrome-black1;
+$pt-form-status-inprogress: $primary-celadon-blue;
+$pt-form-status-selfevalclosed: $secondary-orange-yellow;
+$pt-form-status-readyforreview: $secondary-orange;
+$pt-form-status-toreview: $secondary-plum;
+$pt-form-status-final: $secondary-green;
+$pt-form-status-signed: $secondary-teal;
+
+$training-history-status-approved: $primary-celadon-blue;
+$training-history-status-inprogress: $monochrome-black1;
+$training-history-status-attended: $secondary-green;
+$training-history-status-completed: $secondary-green;
+$training-history-status-rejected: $secondary-imperial-red;
+
+$training-history-cert-status-completed: $secondary-green;
+$training-history-cert-status-to-complete: #495057;
+$training-history-cert-status-not-completed: $secondary-imperial-red;
+
+$current-node-time-line: gold;
+$passed-node-time-line: $primary-navy-blue;
+
+$description-background-graph: white;
+
+$toolbar-height: 4.2857rem;
+$sidebar-width: 35%;
+
+@mixin truncateText {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+@mixin bold {
+  font-weight: 600;
+}
+
+@mixin show-nav {
+  @media (min-width: 961px) {
+    @content;
+  }
+}
+
+@mixin hide-nav {
+  @media (max-width: 960px) {
+    @content;
+  }
+}

@@ -1,0 +1,104 @@
+<form [formGroup]="form">
+  <div class="container p-2">
+    <div class="row">
+      <div class="col-sm-4">
+        <img
+          [src]="
+            (order$ | async)?.product?.image
+              ? (order$ | async)?.product?.image
+              : '../../../../assets/logo_light_bulb.png'
+          "
+          style="width: 100%; height: auto; display: block"
+          [alt]="(order$ | async)?.product?.name"
+        />
+      </div>
+      <div class="col-sm-8">
+        <h3 class="mb-0 mt-2">{{ (order$ | async)?.product?.name }}</h3>
+        <p class="text-secondary mt-0">
+          Mã sản phẩm: {{ (order$ | async)?.product?.code }}
+        </p>
+        <p class="card-text p-0 m-0 text-success">
+          <b> Người nhận: </b>
+          {{ (order$ | async)?.orderByUser?.lastName }}
+          {{ (order$ | async)?.orderByUser?.firstName }}
+        </p>
+        <p class="card-text p-0 m-0 text-success">
+          <b> Email: </b>
+          {{ (order$ | async)?.orderByUser?.email }}
+        </p>
+        <p class="card-text p-0 m-0 text-success">
+          <b> Số điện thoại: </b>
+          {{ (order$ | async)?.orderByUser?.phoneNumber }}
+        </p>
+
+        <app-form-field label="Địa chỉ">
+          <p-dropdown
+            formControlName="addressId"
+            [options]="(addresses$ | async) ?? []"
+            optionValue="id"
+          >
+            <ng-template let-address pTemplate="selectedItem">
+              {{ address?.addressDetail }}, {{ address?.district }},
+              {{ address?.city }}
+            </ng-template>
+            <ng-template let-address pTemplate="item">
+              {{ address?.addressDetail }}, {{ address?.district }},
+              {{ address?.city }}
+            </ng-template>
+          </p-dropdown>
+        </app-form-field>
+
+        <p class="card-text p-0 m-0">
+          Đơn giá (x1): {{ (order$ | async)?.product?.price | money }} VNĐ
+        </p>
+
+        <p class="card-text p-0 my-1">
+          Số lượng:
+          <a
+            class="btn btn-outline-primary py-0 mx-1 text-center"
+            (click)="decreaseAmount()"
+          >
+            -
+          </a>
+          {{ (order$ | async)?.amount }}
+          <a
+            class="btn btn-outline-primary py-0 ms-1 text-center"
+            (click)="increaseAmount()"
+          >
+            +
+          </a>
+        </p>
+
+        <h5 class="text-danger py-2">
+          <b
+            >Tổng:
+            {{
+              (((order$ | async)?.product?.price ?? 0) *
+                ((order$ | async)?.amount ?? 0) | money) + " VNĐ"
+            }}
+          </b>
+        </h5>
+
+        <div class="d-flex">
+          <button
+            *ngIf="form.valid && form.dirty"
+            class="btn btn-primary me-2"
+            (click)="save()"
+          >
+            Cập nhật
+          </button>
+          <button
+            class="btn btn-outline-danger"
+            (click)="remove()"
+            *ngIf="
+              (order$ | async)?.orderByUser?.id === currentUserId ||
+              authResolver.isAdmin
+            "
+          >
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

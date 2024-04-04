@@ -1,0 +1,128 @@
+@import "../../../../styles/styles-variable.scss";
+
+:host ::ng-deep {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  input {
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+  }
+
+  p-menubar {
+    height: $toolbar-height;
+    display: block;
+  }
+
+  .top-menu {
+    width: 100%;
+    z-index: 999;
+    height: $toolbar-height;
+    font-size: 1rem;
+
+    &.p-menubar {
+      padding-left: 0;
+      background-color: white;
+      border-color: $monochrome-grey4;
+      border-radius: 0;
+
+      .p-menubar-root-list {
+        > .p-menuitem {
+          &-active {
+            > .p-menuitem-link {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+
+      ul.p-submenu-list {
+        z-index: 10; // If not set, the table header will override the menu item
+        li.p-menuitem {
+          &:focus,
+          &:hover {
+            background-color: $monochrome-grey4;
+            .p-menuitem-link {
+              border-bottom: none;
+            }
+          }
+
+          &:focus-visible {
+            box-shadow: 0 0 0 0.2rem $primary-navy-blue-light;
+          }
+
+          .p-menuitem-link {
+            margin: 0 1rem;
+          }
+        }
+      }
+
+      .p-menuitem {
+        &-active {
+          > .p-menuitem-link {
+            background-color: transparent;
+          }
+        }
+
+        .p-menuitem-link {
+          padding: 0.75rem 0;
+          margin-left: 1.5rem;
+          height: $toolbar-height;
+
+          &:focus,
+          &:hover {
+            box-shadow: none;
+            .p-menuitem-text {
+              color: $primary-celadon-blue !important;
+            }
+          }
+
+          &:focus-visible {
+            box-shadow: 0 0 0 0.2rem $primary-navy-blue-light;
+          }
+
+          &:not(.p-disabled):hover {
+            background: transparent;
+          }
+        }
+      }
+
+      .p-menu-separator {
+        @include show-nav {
+          border-right: 1px solid $monochrome-grey4;
+          margin-left: 1.5rem;
+          height: 2.574rem;
+        }
+
+        @include hide-nav {
+          width: 100%;
+        }
+      }
+
+      .p-menubar-end {
+        > * {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.logo-img {
+  display: inline;
+  max-height: $toolbar-height - 1rem;
+}
+
+.company-info {
+  text-align: justify !important;
+}
+
+.search-button {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.full-height {
+  min-height: 90vh !important;
+}

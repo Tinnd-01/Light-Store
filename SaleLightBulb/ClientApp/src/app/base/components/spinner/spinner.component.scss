@@ -1,0 +1,32 @@
+$primary-navy-blue: #2e548a; // 0
+$spinner-color: $primary-navy-blue !default;
+$spinner-size: 48px !default;
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(0.6px);
+  z-index: 99999;
+
+  .spinner {
+    font-size: $spinner-size;
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+
+    &.center {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+}

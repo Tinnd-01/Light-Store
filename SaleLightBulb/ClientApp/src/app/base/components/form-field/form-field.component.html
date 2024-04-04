@@ -1,0 +1,11 @@
+<label [class.required]="isRequired" class="mb-1" *ngIf="label"> {{ label }} </label>
+<ng-container>
+  <div [class.invalid]="invalid">
+    <ng-content></ng-content>
+    <div *ngIf="invalid" class="p-invalid"></div>
+  </div>
+  <small class="p-invalid" *ngIf="invalid">
+    {{ getErrorMessage() }}
+  </small>
+  <small *ngIf="!invalid && preventErrorUseSpace">&nbsp;</small>
+</ng-container>

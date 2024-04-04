@@ -1,0 +1,48 @@
+<div class="container">
+  <div *ngFor="let category of categories$ | async">
+    <div class="m-4"></div>
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="d-flex justify-content-between px-2 pt-2">
+          <h2 class="ps-2 text-success">{{ category.name }}</h2>
+          <a (click)="goToProductsOfCategoryId(category.id)" class="p-button p-button-link none-underline">Xem thêm
+            >></a>
+        </div>
+      </ng-template>
+      <div class="row">
+        <div class="col-3 p-2" *ngFor="let product of category.products">
+          <div class="card">
+            <img class="card-img-top" [src]="
+                product.image
+                  ? product.image
+                  : '../../../../assets/logo_light_bulb.png'
+              " [alt]="product.name" />
+            <div class="card-body">
+              <a (click)="goToProductDetail(product.id)"
+                class="p-button p-button-link none-underline text-start m-0 p-0">
+                <h5 class="card-title" [pTooltip]="product.name ?? ''">
+                  {{ product.name }}
+                </h5>
+              </a>
+              <p class="card-text p-0 m-0">Mã sản phẩm: {{ product.code }}</p>
+              <p class="card-text p-0 m-0">Màu sắc: {{ product.color }}</p>
+              <p class="card-text p-0 m-0">
+                Điện áp / Công suất: {{ product.voltageOrPowerCapacity }}
+              </p>
+              <p class="text-danger pt-2">
+                <b>{{ (product.price | money) + " VNĐ" }}</b>
+              </p>
+              <a *ngIf="product.amount" class="btn btn-success m-0" (click)="orderNow(product)">Đặt hàng ngay</a>
+
+              <a *ngIf="product.amount == 0" class="btn btn-secondary m-0">
+                Hết hàng
+              </a>
+
+              <a class="btn btn-primary ms-2" (click)="addToCart(product)">Thêm vào giỏ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

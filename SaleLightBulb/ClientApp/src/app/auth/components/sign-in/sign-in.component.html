@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="py-5">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <p-card class="col-sm-5 p-2">
+      <ng-template pTemplate="header">
+        <h2 class="pt-4 ps-4 text-primary">Đăng nhập</h2>
+      </ng-template>
+
+      <app-form-field label="Email">
+        <input type="text" pInputText formControlName="email" />
+      </app-form-field>
+      <app-form-field label="Mật khẩu">
+        <p-password formControlName="password" [toggleMask]="true" [feedback]="false"></p-password>
+      </app-form-field>
+
+      <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-end">
+          <p-button label="Đăng nhập" (onClick)="signIn()" icon="pi pi-check"></p-button>
+          <p-button label="Đăng ký" icon="pi pi-sign-in" styleClass="p-button-success"
+            [style]="{ 'margin-left': '.5em' }" (onClick)="goToSignUpPage()"></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+    <div class="col-sm-3"></div>
+  </div>
+</form>
